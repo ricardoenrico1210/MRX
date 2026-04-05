@@ -300,35 +300,47 @@ code{font-family:var(--fm);font-size:11px;background:#f0f0f8;border:1px solid #d
 .msg-group .sender-name{font-size:11px;font-weight:700;color:var(--tm);margin-bottom:4px;padding-left:46px}
 .msg-group.me .sender-name{display:none}
 /* Message row */
-.msg-row{display:flex;align-items:flex-end;gap:10px;margin-bottom:3px}
+.msg-row{display:flex;align-items:flex-end;gap:8px;margin-bottom:2px}
 .msg-row.me{flex-direction:row-reverse}
-/* Avatar in chat */
-.msg-av{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0;align-self:flex-end}
+.msg-av{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0}
 .msg-av-placeholder{width:32px;flex-shrink:0}
-/* Bubble */
-.msg-bubble{max-width:60%;padding:10px 14px;border-radius:18px;font-size:14px;line-height:1.6;word-break:break-word;white-space:pre-wrap;position:relative;cursor:pointer;transition:opacity .15s}
-.msg-bubble:hover{opacity:.92}
-.msg-row.them .msg-bubble{background:var(--w);border:1px solid var(--br);border-bottom-left-radius:4px;color:var(--tx);box-shadow:0 1px 4px rgba(0,0,0,.07)}
+/* BUBBLE: direkt in msg-row als flex-item - max-width % rechnet korrekt */
+.msg-bubble{
+  display:block;
+  max-width:65%;
+  min-width:44px;
+  padding:9px 13px;
+  border-radius:18px;
+  font-size:14px;
+  line-height:1.55;
+  word-break:break-word;
+  overflow-wrap:anywhere;
+  white-space:normal;
+  position:relative;
+  cursor:pointer;
+  transition:opacity .15s;
+  box-sizing:border-box;
+  flex-shrink:1;
+  flex-grow:0;
+}
+.msg-bubble:hover{opacity:.88}
+.msg-row.them .msg-bubble{background:var(--w);border:1px solid var(--br);border-bottom-left-radius:4px;color:var(--tx);box-shadow:0 1px 4px rgba(0,0,0,.06)}
 .msg-row.me .msg-bubble{background:var(--ac);border-bottom-right-radius:4px;color:#fff}
-/* Time */
-.msg-time{font-size:10px;color:var(--tm);margin-top:3px;padding:0 4px;white-space:nowrap}
-.msg-row.me .msg-time{text-align:right}
-/* Reactions */
-.msg-reactions{display:flex;gap:4px;flex-wrap:wrap;margin-top:4px;padding:0 4px}
-.msg-row.me .msg-reactions{justify-content:flex-end}
+.msg-time{font-size:10px;color:var(--tm);margin-top:3px;padding:0 2px}
+.msg-time.me{text-align:right}
+.msg-reactions{display:flex;gap:4px;flex-wrap:wrap;margin-top:4px;padding:0 2px}
+.msg-reactions.me{justify-content:flex-end}
 .reaction-pill{background:var(--w);border:1.5px solid var(--br);border-radius:20px;padding:3px 9px;font-size:12px;cursor:pointer;transition:all .15s;user-select:none;display:inline-flex;align-items:center;gap:4px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
-.reaction-pill:hover{border-color:var(--ac);background:var(--al);transform:scale(1.08)}
+.reaction-pill:hover{border-color:var(--ac);background:var(--al)}
 .reaction-pill.mine{background:rgba(29,158,117,.1);border-color:rgba(29,158,117,.4)}
 .reaction-count{font-size:11px;font-weight:700;color:var(--ts)}
-/* Emoji picker */
 .react-picker{display:none;position:absolute;background:var(--w);border:1px solid var(--br);border-radius:16px;padding:8px 10px;gap:6px;box-shadow:0 8px 24px rgba(0,0,0,.14);z-index:200;bottom:calc(100% + 8px);left:0;white-space:nowrap}
 .react-picker.open{display:flex}
 .msg-row.me .react-picker{left:auto;right:0}
 .react-btn{font-size:20px;cursor:pointer;padding:4px 5px;border-radius:9px;transition:all .15s;border:none;background:transparent;line-height:1}
-.react-btn:hover{background:var(--cb);transform:scale(1.3)}
-/* Link card */
-.msg-link{background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.35);border-radius:10px;padding:8px 11px;margin-top:8px;cursor:pointer;font-size:12.5px;transition:background .15s;display:flex;align-items:center;gap:6px}
-.msg-link:hover{background:rgba(255,255,255,.32)}
+.react-btn:hover{background:var(--cb);transform:scale(1.2)}
+.msg-link{background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.35);border-radius:10px;padding:7px 10px;margin-top:7px;cursor:pointer;font-size:12.5px;transition:background .15s;display:flex;align-items:center;gap:6px}
+.msg-link:hover{background:rgba(255,255,255,.3)}
 .msg-row.them .msg-link{background:var(--al);border-color:rgba(29,158,117,.25);color:var(--ad)}
 /* Empty */
 .chat-empty-state{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;color:var(--tm);font-size:13px;gap:10px}
@@ -545,7 +557,7 @@ body.dark .chat-header{background:#18181f}
   .mo-b{max-height:93vh}
   .search-modal{padding:50px 12px 80px}
   .vt{font-size:18px}
-  .msg-bubble{max-width:78%}
+  .msg-bubble{max-width:82%}
   .chat-chs.mobile-show{display:flex;position:fixed;inset:0;z-index:400;background:var(--w);padding-top:var(--tbh)}
   .chat-msgs{padding:12px 14px}
   #tc{bottom:calc(var(--bnh) + 10px + var(--safe-b))}
@@ -572,7 +584,7 @@ body.dark .chat-header{background:#18181f}
     <div class="l-brand"><div class="l-logo">✦</div><div class="l-name">MRX-Vision</div><div class="l-sub">Business Workspace</div></div>
     <div class="l-card">
       <div id="ls-setup" style="display:none">
-        <div class="l-setup-note">👋 Wichtig: Beide Partner müssen <strong>exakt dasselbe Passwort</strong> verwenden – das ermöglicht die gemeinsame Verschlüsselung und den Sync.</div>
+        <div class="l-setup-note">👋 <strong>Beide Partner müssen exakt dasselbe Passwort eingeben.</strong> Erst dann funktioniert der Sync – das Passwort ist gleichzeitig euer Verschlüsselungsschlüssel.</div>
         <label class="l-label">Passwort wählen</label>
         <input class="l-input" type="password" id="pw1" placeholder="Min. 8 Zeichen" autocomplete="new-password">
         <label class="l-label">Wiederholen</label>
@@ -580,8 +592,9 @@ body.dark .chat-header{background:#18181f}
         <button class="l-btn" id="setup-btn" onclick="doSetup()">Workspace erstellen →</button>
       </div>
       <div id="ls-login" style="display:none">
+        <div id="ls-login-hint" style="display:none;font-size:12px;color:#8888b0;line-height:1.6;padding:10px 14px;background:rgba(29,158,117,.08);border-radius:10px;border:1px solid rgba(29,158,117,.18);margin-bottom:12px">💡 Neues Gerät? Gleiche URL + gleiches Passwort wie dein Partner eingeben — Daten werden nach Login automatisch synchronisiert.</div>
         <label class="l-label">Passwort</label>
-        <input class="l-input" type="password" id="pwl" placeholder="Passwort eingeben" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()">
+        <input class="l-input" type="password" id="pwl" placeholder="Team-Passwort eingeben" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()">
         <button class="l-btn" id="login-btn" onclick="doLogin()">Weiter →</button>
       </div>
       <div class="l-err" id="le"></div>
@@ -961,13 +974,24 @@ async function loadState(){
 window.addEventListener('DOMContentLoaded',()=>{
   const dm=localStorage.getItem(DM_K)==='1';
   if(dm){document.body.classList.add('dark');const t=document.getElementById('dark-toggle');if(t)t.checked=true;}
-  if(localStorage.getItem(SU)){document.getElementById('ls-login').style.display='block';setTimeout(()=>document.getElementById('pwl').focus(),200);}
-  else{document.getElementById('ls-setup').style.display='block';setTimeout(()=>document.getElementById('pw1').focus(),200);}
+  const hasSU=localStorage.getItem(SU);
+  const hasData=localStorage.getItem(DK);
+  if(hasSU&&hasData){
+    // Dieses Gerät hat Daten - normaler Login
+    document.getElementById('ls-login').style.display='block';
+    document.getElementById('ls-login-hint').style.display='block';
+    setTimeout(()=>document.getElementById('pwl').focus(),200);
+  } else {
+    // Kein lokales Setup oder neues Gerät
+    document.getElementById('ls-setup').style.display='block';
+    setTimeout(()=>document.getElementById('pw1').focus(),200);
+  }
   document.getElementById('dash-date').textContent=new Date().toLocaleDateString('de-AT',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
 });
 function setLoginLoading(isLoading,btnText='Weiter →'){const btns=document.querySelectorAll('.l-btn');btns.forEach(b=>{b.disabled=isLoading;b.style.opacity=isLoading?'0.7':'1';b.textContent=isLoading?'⏳ Bitte warten…':btnText;});const inputs=document.querySelectorAll('.l-input');inputs.forEach(i=>i.disabled=isLoading);}
-function doSetup(){const p1=document.getElementById('pw1').value,p2=document.getElementById('pw2').value,le=document.getElementById('le');if(p1.length<8){le.textContent='Min. 8 Zeichen eingeben';return;}if(p1!==p2){le.textContent='Passwörter stimmen nicht überein';return;}le.textContent='';setLoginLoading(true,'Workspace erstellen →');setTimeout(async()=>{try{cKey=await deriveKey(p1);localStorage.setItem(SU,'1');uState.setupDate=new Date().toISOString();await saveState();startApp();}catch(e){document.getElementById('le').textContent='Fehler: '+e.message;setLoginLoading(false,'Workspace erstellen →');}},50);}
-function doLogin(){const pw=document.getElementById('pwl').value,le=document.getElementById('le');le.textContent='';if(!pw){le.textContent='Bitte Passwort eingeben';return;}setLoginLoading(true,'Weiter →');setTimeout(async()=>{try{cKey=await deriveKey(pw);await loadState();startApp();}catch(e){document.getElementById('le').textContent='Falsches Passwort – Partner muss gleiches Passwort verwenden';cKey=null;setLoginLoading(false,'Weiter →');}},50);}
+function doSetup(){const p1=document.getElementById('pw1').value,p2=document.getElementById('pw2').value,le=document.getElementById('le');if(p1.length<8){le.textContent='Min. 8 Zeichen eingeben';return;}if(p1!==p2){le.textContent='Passwörter stimmen nicht überein';return;}le.textContent='';setLoginLoading(true,'Workspace erstellen →');setTimeout(async()=>{try{cKey=await deriveKey(p1);localStorage.setItem(SU,'1');uState.setupDate=new Date().toISOString();// Kein saveState nötig vor startApp – startApp macht sync der alle Daten holt
+startApp();}catch(e){document.getElementById('le').textContent='Fehler: '+e.message;setLoginLoading(false,'Workspace erstellen →');}},50);}
+function doLogin(){const pw=document.getElementById('pwl').value,le=document.getElementById('le');le.textContent='';if(!pw){le.textContent='Bitte Passwort eingeben';return;}setLoginLoading(true,'Weiter →');setTimeout(async()=>{try{cKey=await deriveKey(pw);try{await loadState();}catch(e){/* Kein lokales Data ok – neues Gerät */}startApp();}catch(e){document.getElementById('le').textContent='Fehler: '+e.message;cKey=null;setLoginLoading(false,'Weiter →');}},50);}
 async function changePassword(){const po=document.getElementById('pw-old').value,pn1=document.getElementById('pw-new1').value,pn2=document.getElementById('pw-new2').value,msg=document.getElementById('pw-msg');if(pn1!==pn2){msg.style.color='var(--dn)';msg.textContent='Passwörter stimmen nicht überein';return;}if(pn1.length<8){msg.style.color='var(--dn)';msg.textContent='Min. 8 Zeichen';return;}try{const tk=await deriveKey(po);await dec(tk,JSON.parse(localStorage.getItem(DK)));cKey=await deriveKey(pn1);await saveState();msg.style.color='var(--ac)';msg.textContent='✓ Passwort geändert – Partner muss dasselbe Passwort verwenden!';toast('Passwort geändert','ok');}catch(e){msg.style.color='var(--dn)';msg.textContent='Aktuelles Passwort falsch';}}
 function startApp(){
   document.getElementById('LS').style.display='none';
@@ -977,9 +1001,11 @@ function startApp(){
   const su=document.getElementById('sync-url');if(su)su.value=uState.syncConfig.serverUrl||'';
   const st=document.getElementById('sync-toggle');if(st)st.checked=uState.syncConfig.enabled;
   if(uState.syncConfig.enabled&&uState.syncConfig.serverUrl){
-    setSyncStatus('ok','Sync aktiv');startSyncTimer();setTimeout(()=>syncNow(),2000);
+    setSyncStatus('ok','Verbinde…');
+    startSyncTimer();
+    // Sofort syncen: 500ms warten damit UI fertig gerendert ist
+    setTimeout(()=>syncNow(),500);
   } else {setSyncStatus('ok','Lokal gespeichert');}
-  // Service Worker + Benachrichtigungen
   initNotifications();
 }
 
@@ -1263,13 +1289,16 @@ function renderChatView(){
       else{avEl.className='msg-av-placeholder';}
       row.appendChild(avEl);
     }
-    // Bubble wrapper
-    const wrap=document.createElement('div');wrap.style.position='relative';wrap.style.maxWidth='100%';
-    // Bubble
-    const bubble=document.createElement('div');bubble.className='msg-bubble';
-    bubble.style.position='relative';
-    // !! WICHTIG: textContent statt innerHTML – kein HTML-Injection, kein Letter-Bug
+    // Bubble DIREKT in row (kein wrap-div → max-width% löst korrekt auf)
+    const bubble=document.createElement('div');
+    bubble.className='msg-bubble';
+    // textContent verhindert HTML-Injection und Letter-Bug
     bubble.textContent=m.content;
+    // Reaction picker (absolut positioniert vom bubble)
+    const picker=document.createElement('div');picker.className='react-picker';picker.id='rp-'+m.id;
+    EMOJIS.forEach(em=>{const b=document.createElement('button');b.className='react-btn';b.textContent=em;b.onclick=(e)=>{e.stopPropagation();toggleReaction(m.id,em);};picker.appendChild(b);});
+    const pinBtn=document.createElement('button');pinBtn.className='react-btn';pinBtn.textContent='📌';pinBtn.onclick=(e)=>{e.stopPropagation();pinMsg(m.id);};picker.appendChild(pinBtn);
+    bubble.appendChild(picker);
     // Link card
     if(m.linked){
       const link=document.createElement('div');link.className='msg-link';
@@ -1277,13 +1306,8 @@ function renderChatView(){
       link.onclick=(e)=>{e.stopPropagation();openLinked(m.linkedType,m.linked);};
       bubble.appendChild(link);
     }
-    // Reaction picker
-    const picker=document.createElement('div');picker.className='react-picker';picker.id='rp-'+m.id;
-    EMOJIS.forEach(em=>{const b=document.createElement('button');b.className='react-btn';b.textContent=em;b.title=em;b.onclick=(e)=>{e.stopPropagation();toggleReaction(m.id,em);};picker.appendChild(b);});
-    const pinBtn=document.createElement('button');pinBtn.className='react-btn';pinBtn.textContent='📌';pinBtn.title='Anpinnen';pinBtn.onclick=(e)=>{e.stopPropagation();pinMsg(m.id);};picker.appendChild(pinBtn);
-    wrap.appendChild(bubble);wrap.appendChild(picker);
-    bubble.onclick=()=>toggleReactPicker(m.id);
-    row.appendChild(wrap);
+    bubble.onclick=(e)=>{if(e.target===bubble||e.target.className==='msg-bubble')toggleReactPicker(m.id);};
+    row.appendChild(bubble);
     if(isMe){
       const avEl=document.createElement('div');
       if(isLastInGroup){avEl.className=`msg-av av ${m.sender==='ma1'?'av1':'av2'}`;avEl.textContent=(uState.maNames[m.sender]||'?').substring(0,2).toUpperCase();}
@@ -1399,7 +1423,7 @@ async function syncNow(){
     const prevEventIds=new Set((uState.events||[]).map(e=>e.id));
 
     // 1. Remote Stand holen
-    const r=await fetch(url+'/sync',{signal:AbortSignal.timeout(8000)});
+    const r=await fetch(url+'/sync',{signal:AbortSignal.timeout(15000)});
     if(r.ok){
       const remote=await r.json();
       if(remote&&remote.iv&&remote.data){
@@ -1450,7 +1474,7 @@ async function syncNow(){
     }
     // 4. Gemergten Stand hochladen
     const enc2=await enc(cKey,uState);
-    await fetch(url+'/sync',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(enc2),signal:AbortSignal.timeout(8000)});
+    await fetch(url+'/sync',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(enc2),signal:AbortSignal.timeout(15000)});
     // 5. Lokal speichern + UI updaten
     await saveState();
     setSyncStatus('ok','Sync '+new Date().toLocaleTimeString('de-AT',{hour:'2-digit',minute:'2-digit'}));
@@ -1465,7 +1489,7 @@ async function syncNow(){
 }
 async function saveAndSync(){await saveState();if(uState.syncConfig.enabled&&uState.syncConfig.serverUrl)syncNow();}
 async function manualSync(){setSyncStatus('syncing','Manueller Sync…');await syncNow();toast('Synchronisiert ✓','ok');}
-function startSyncTimer(){stopSyncTimer();syncTimer=setInterval(()=>syncNow(),20000);}
+function startSyncTimer(){stopSyncTimer();syncTimer=setInterval(()=>syncNow(),10000);}
 function stopSyncTimer(){if(syncTimer){clearInterval(syncTimer);syncTimer=null;}}
 
 // ═══ QUICK ADD ══════════════════════════════════════════
